@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//el programa puede recibir fechas en formato dd/mm/aaaa o dd/mm/aaaa o d/m/a, todos los numeros que no se ingresen se asumen 0 con fin de realizar el ingreso de datos mas rapido
 void loop(void);
 int *getfecha(void);
 int validacion(int, int);
@@ -46,7 +47,7 @@ void loop(void){
         if (fbisiesto==1) { //si dio error y el año es bisiesto, evaluar que el error no sea por 29 de febrero
           if ((day==29)&&(month==2)) {
             err=0;  //el error era por el 29 de feb, corregimos el flag
-            printf("Excepto en este caso (año bisiesto).\n");
+            printf("Excepto en este caso (ano bisiesto).\n");
           }
         }
       }
@@ -64,6 +65,9 @@ void loop(void){
       day0=day;
       month0=month;
       year0=year;
+      printf("\n----------------------------\n");
+      printf("Comienza el segundo ingreso.\n");
+      printf("----------------------------\n");
     }
   }
 
@@ -133,26 +137,27 @@ int validacion(int dia, int mes){
 
   //comienza validacion de datos
   if ((mes>12)||(mes<1)){ //el mes debe estar entre 1 y 12
-    printf("-------------\n");
+    printf("------------------------\n");
     printf("Mes no valido\n");
     error=1;
   }
 
   if ((dia>31)||(dia<1)){ //el dia debe estar entre 1 y 31
-      printf("--------------\n");
+      printf("------------------------\n");
       printf("Dia no valido.\n");
       error=1;
   }
   if ((mes==2)&&(dia==28)){ //si el mes es febrero puede tener 28 dias
-    printf("--------------------------------------------\n");
+    printf("------------------------\n");
     printf("No me vas a arruinar con 28 de febrero capo.\n");
   }
   else if ((mes==2)&&(dia>28)){ //si el mes es febrero la mayor cantidad posible es 29
     printf("------------------------\n");
-    printf("El mes %d tiene 28 dias.\n",mes);
+    printf("El mes %d no tiene %d dias.\n",mes ,dia);
     error=1;
   }
   else if ((tabla[mes-1]==0)&&(dia==31)){ //si el mes tiene 30 dias y el dia es 31, esta mal
+    printf("------------------------\n");
     printf("El mes %d tiene 30 dias.\n",mes);
     error=1;
   }
@@ -166,7 +171,12 @@ int validyear (int ano){
   int siglo=0, cha, ultimateano, mistake=0;
 
   if (ano<100){
-    printf("El año %d tiene dos o menos digitos. Ingrese el siglo, sino ingrese 0.\n",ano);
+
+    printf("\n*****************************************\n");
+    printf("* El ano %d tiene dos o menos digitos.  *\n",ano);
+    printf("* Ingrese el siglo, sino ingrese 0.     *\n");
+    printf("*****************************************\n");
+
     while ((cha = getchar()) != '\n') {
       if ( ((cha - '0')>9) || ((cha - '0')<0) ) { //si el caracter no es un numero esta mal
         printf("----------Input Error----------\n");
