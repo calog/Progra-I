@@ -1,6 +1,6 @@
 #include<stdio.h>
-#define M 10 //cant filas
-#define N 15 //cant columnas
+#define M 7 //cant filas
+#define N 5 //cant columnas
 
 int main(void) {
     char cantfil=M;
