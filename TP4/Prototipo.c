@@ -18,7 +18,7 @@ void generationleap(char[100][10],char[100][10] ,int ,int);
 int main(void) {
 
   char matriz[100][10];
-  int maxfil ,maxcol, density;
+  int maxfil ,maxcol, density, i=1;
 
   //preguntar por fila
   do {  //mientras haya un error, seguir preguntando
@@ -65,6 +65,7 @@ int main(void) {
   {
     sleep(5);
     //recibe la matriz de juego y la cantidad de columnas y filas
+    printf("\nGeneration %d \n\n",i++);
     nxtgeneration(matriz, maxfil, maxcol);
   }
 
@@ -230,6 +231,5 @@ void generationleap (char nextmatrix[100][10],char matrix[100][10], int fila, in
             matrix[i][j]=nextmatrix[i][j];  //actualiza el tablero de juego con los nuevos estados de las células.
         }
     }
-    printf("\nNext stage \n\n");
     print(matrix,fila,col);
 }
