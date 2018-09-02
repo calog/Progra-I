@@ -4,7 +4,6 @@
 #include <time.h>
 #include <unistd.h>
 
-void loop(void);
 int evaluate(char[100][10], int, int, int, int);
 int request(void);
 void generate(char[100][10], int);
@@ -73,13 +72,6 @@ int main(void) {
   return 0;
 }
 
-//funcion loop
-void loop(void) {
-
-
-
-}
-
 //funcion evalua la cantidad de celulas vivas al rededor de la celda ij
 int evaluate (char matrx[100][10], int i, int j, int fila, int col) {
 
@@ -133,7 +125,7 @@ void generate (char matrx[100][10], int j) {
   srand(time(NULL));  //seteo una semilla para que la generacion sea completamente random
 
   for (i=0;i<100;i++) {
-    for (h=0;h<100;h++) {
+    for (h=0;h<10;h++) {
       random = 1 + (rand()%j);  //la probabilidad de generar unos aumenta con la densidad elegida
       if (random == 1)  //si se genera un uno, hay una celula viva
         matrx[i][h]='X';
