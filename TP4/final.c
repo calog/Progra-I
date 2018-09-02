@@ -4,7 +4,6 @@
 #include <time.h>
 #include <unistd.h>
 
-void loop(void);
 int evaluate(char[100][10], int, int, int, int);
 int request(void);
 void generate(char[100][10], int);
@@ -71,13 +70,6 @@ int main(void) {
 
   printf("not crashed\n");
   return 0;
-}
-
-//funcion loop
-void loop(void) {
-
-
-
 }
 
 //funcion evalua la cantidad de celulas vivas al rededor de la celda ij
