@@ -59,16 +59,15 @@ int main(void) {
   printf("\n");
   print(matriz,maxfil,maxcol);
 
-  //el crash seguramente es por esta parte, faltaria la funcion de fran y esta terminado
+  //se termino el ingreso de datos y generacion de matriz, se procede a generar las siguientes matrices
   while (1)
   {
-    sleep(5);
+    sleep(5); //decidimos usar el sleep con fines didacticos pero podria no utilizarse y hacer una funcion que simplemente espere la presion de una tecla
     //recibe la matriz de juego y la cantidad de columnas y filas
     printf("\nGeneration %d \n\n",i++);
     nxtgeneration(matriz, maxfil, maxcol);
   }
-
-  printf("not crashed\n");
+  
   return 0;
 }
 
