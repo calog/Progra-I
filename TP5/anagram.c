@@ -29,11 +29,11 @@ int validate (char *w1, char *w2)
     }
     for (i=0;w1[i];i++)   //evalúa si se llegó al terminador de la primera palabra
     {
-        for (j=0;w2[j];j++)
+        for (j=0;w2[j];j++)	//evalúa si se llegó al final de la segunda palabra.
         {
-            if (w1[i]==w2[j])
+            if (w1[i]==w2[j])	//si ambas letras coinciden
             {
-                if(found==0)
+                if(found==0)	//si la letra a buscar no ha sido encontrada aún, se prosigue a marcar como encontrada, sino no se hace nada
                 {
                     w2[j]=' '; //para que no se continúe considerando esta letra, se le da el valor ' ', que nunca coincidirá con una letra de la palabra 1
                     count++;  //se incrementa la cantidad de letras en común
