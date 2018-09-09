@@ -28,9 +28,29 @@ int main (void) {
     } while (error==1);
 
     //mostramos palabras elegidas
-    i=0;
     printf("\n****************************************\n");
     printf("Primera palabra: ");
+    for (i=0; word1[i] != TER ;i++) {
+      printf("%c",word1[i]);
+    }
+    printf("\n");
+
+    printf("Segunda palabra: ");
+    for (i=0; word2[i] != TER ;i++) {
+      printf("%c",word2[i]);
+    }
+    printf("\n");
+    printf("****************************************\n");
+
+    //pasamos todas las mayusculas a minisculas
+    convert(word1);
+    convert(word2);
+
+    //imprimimos las palabras convertidas
+    printf("\nEn minisculas:\n");
+    printf("****************************************\n");
+    printf("Primera palabra: ");
+    i=0;
     while ( word1[i] != TER ) {
       printf("%c",word1[i]);
       i++;
@@ -46,15 +66,31 @@ int main (void) {
     printf("\n");
     printf("****************************************\n");
 
-    printf("HASTA ACA LLEGA LA PARTE DE LUCAS\n");
-
-    //pasamos todas las mayusculas a minisculas
-    convert(word1);
-    convert(word2);
-
     //validamos las palabras
     result=validate(word1,word2);
-    printf("%d\n",result);
+
+    if (result==1) {  //se puede armar, lo comunicamos
+      printf("\nSe puede armar \"");
+      for (i=0; word2[i] != TER ;i++) {
+        printf("%c",word2[i]);
+      }
+      printf("\" con las letras de \"");
+      for (i=0; word1[i] != TER ;i++) {
+        printf("%c",word1[i]);
+      }
+      printf("\".\n");
+    }
+    else {  //no se puede armar, decimos que no se puede
+      printf("\nNo se puede armar \"");
+      for (i=0; word2[i] != TER ;i++) {
+        printf("%c",word2[i]);
+      }
+      printf("\" con las letras de \"");
+      for (i=0; word1[i] != TER ;i++) {
+        printf("%c",word1[i]);
+      }
+      printf("\".\n");
+    }
 }
 
 int validate (char *w1, char *w2) {
@@ -71,9 +107,9 @@ int validate (char *w1, char *w2) {
     {
         return toughluck;
     }
-    for (i=0;w1[i];i++)   //evalúa si se llegó al terminador de la primera palabra
+    for (i=0;w1[i]!=TER;i++)   //evalúa si se llegó al terminador de la primera palabra
     {
-        for (j=0;w2[j];j++)	//evalúa si se llegó al final de la segunda palabra.
+        for (j=0;w2[j]!=TER;j++)	//evalúa si se llegó al final de la segunda palabra.
         {
             if (w1[i]==w2[j])	//si ambas letras coinciden
             {
@@ -99,7 +135,7 @@ int validate (char *w1, char *w2) {
 
 int wordlength (char *word) {
     int count=0, i=0; //count indica cuántas letras hay en la palabra, i se utiliza para moverse en el arreglo
-    while (word[i])     //evalúa si el carácter indicado es el terminador de la palabra
+    while (word[i]!=TER)  //evalúa si el carácter indicado es el terminador de la palabra
     {
         count++;
         i++;
@@ -165,5 +201,4 @@ void convert (char *arr) {
 			}
 		}
 	}
-	printf("%s\n",arr);
 }
