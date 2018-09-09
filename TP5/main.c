@@ -70,26 +70,10 @@ int main (void) {
     result=validate(word1,word2);
 
     if (result==1) {  //se puede armar, lo comunicamos
-      printf("\nSe puede armar \"");
-      for (i=0; word2[i] != TER ;i++) {
-        printf("%c",word2[i]);
-      }
-      printf("\" con las letras de \"");
-      for (i=0; word1[i] != TER ;i++) {
-        printf("%c",word1[i]);
-      }
-      printf("\".\n");
+      printf("\nSe puede armar.\n");
     }
     else {  //no se puede armar, decimos que no se puede
-      printf("\nNo se puede armar \"");
-      for (i=0; word2[i] != TER ;i++) {
-        printf("%c",word2[i]);
-      }
-      printf("\" con las letras de \"");
-      for (i=0; word1[i] != TER ;i++) {
-        printf("%c",word1[i]);
-      }
-      printf("\".\n");
+      printf("\nNo se puede armar.\n");
     }
 }
 
