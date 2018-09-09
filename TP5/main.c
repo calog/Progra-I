@@ -9,10 +9,11 @@ int validate (char *w1, char *w2);  //la función evalúa si es posible formar l
 int wordlength (char *word);  //calcula la cantidad de caracteres en una palabra
 int askuser (char *point);  //toma las palabras de la consola
 void convert (char *arr);  //cambia las mayusculas por sus equivalentes en minusculas
+void copy (char *arr1, char *arr2);  //crea una copia del arreglo
 
 int main (void) {
     int result, error, i;
-    char word1[MAX], word2[MAX];
+    char word1[MAX], word2[MAX], word1c[MAX], word2c[MAX];
 
     //ingreso de palabras
     do {
@@ -46,34 +47,45 @@ int main (void) {
     convert(word1);
     convert(word2);
 
+    //hacemos una copia de las palabras
+    copy(word1, word1c);
+    copy(word2, word2c);
+
     //imprimimos las palabras convertidas
     printf("\nEn minisculas:\n");
     printf("****************************************\n");
+
     printf("Primera palabra: ");
-    i=0;
-    while ( word1[i] != TER ) {
+    for (i=0; word1[i] != TER ;i++) {
       printf("%c",word1[i]);
-      i++;
     }
     printf("\n");
 
-    i=0;
     printf("Segunda palabra: ");
-    while ( word2[i] != TER ) {
+    for (i=0; word2[i] != TER ;i++) {
       printf("%c",word2[i]);
-      i++;
     }
     printf("\n");
     printf("****************************************\n");
 
-    //validamos las palabras
+    //validamos las palabras en un orden
     result=validate(word1,word2);
 
     if (result==1) {  //se puede armar, lo comunicamos
-      printf("\nSe puede armar.\n");
+      printf("\nSe puede armar la primera palabra con la segunda.\n");
     }
     else {  //no se puede armar, decimos que no se puede
-      printf("\nNo se puede armar.\n");
+      printf("\nNo se puede armar la primera palabra con la segunda.\n");
+    }
+
+    //validamos las palabras en otro orden
+    result=validate(word2c,word1c);
+
+    if (result==1) {  //se puede armar, lo comunicamos
+      printf("\nSe puede armar la segunda palabra con la primera.\n\n");
+    }
+    else {  //no se puede armar, decimos que no se puede
+      printf("\nNo se puede armar la segunda palabra con la primera.\n\n");
     }
 }
 
@@ -185,4 +197,14 @@ void convert (char *arr) {
 			}
 		}
 	}
+}
+
+void copy (char *arr1, char *arr2) {
+  int i;
+
+  for(i=0;arr1[i]!=TER;i++) {  //copiamos todos los caracteres
+    arr2[i]=arr1[i];
+  }
+  arr2[i]=TER;  //y copiamos el terminador
+
 }
