@@ -8,7 +8,7 @@
 int validate (char *w1, char *w2);  //la función evalúa si es posible formar la primer palabra con las letras de la segunda, recibe punteros al inicio de ambas palabras.
 int wordlength (char *word);  //calcula la cantidad de caracteres en una palabra
 int askuser (char *point);  //toma las palabras de la consola
-void convert (char arr[]);  //cambia las mayusculas por sus equivalentes en minusculas
+void convert (char *arr);  //cambia las mayusculas por sus equivalentes en minusculas
 
 int main (void) {
     int result, error, i;
@@ -155,7 +155,7 @@ void convert (char *arr) {
 	char minu[]= "abcdefghijklmnopqrstuvwxyz";
 	int i, j;
 
-	for(i=0;arr[i];++i)
+	for(i=0;arr[i]!=TER;++i)
 	{
 		for(j=0;mayu[j];++j)
 		{
