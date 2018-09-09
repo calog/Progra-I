@@ -3,6 +3,7 @@
 
 //definimos algunas constantes
 #define MAX 10 //maximos caracteres de la palabra
+#define MAXTXT 200  //maximo de caracteres dentro del txt
 #define TER '\n' //terminador establecido de palabra
 
 int validate (char *w1, char *w2);  //la función evalúa si es posible formar la primer palabra con las letras de la segunda, recibe punteros al inicio de ambas palabras.
@@ -12,7 +13,8 @@ void convert (char *arr);  //cambia las mayusculas por sus equivalentes en minus
 void copy (char *arr1, char *arr2);  //crea una copia del arreglo
 int request(void);  //pide numeros y valida
 void program (void);  //programa de comparacion de palabras
-void pruebas (void);  //banco de pruebas
+void banco (char *array);  //banco de pruebas
+void pruebas (void);
 
 int main (void) {
   int opcion;
@@ -259,6 +261,41 @@ int request (void) {
   }
 }
 
-void pruebas (void) {
+void banco (char *array) {
 
+  FILE *fp; //seteamos puntero dentro del archivo
+  char ch;
+  int i=0;
+
+  fp=fopen("bancoPruebas.txt", "r");  //abrimos el archivo con modalidad read
+  while (ch!=EOF) { //hasta final del archivo
+    ch=fgetc(fp); //tomamos caracter por caracter
+    if (ch==EOF) {  //si llegamos al final del archivo corregimos errores de copiado
+      array[i]=TER;
+      array[i+1]=TER;
+      break;
+    }
+    array[i]=ch;  //si no llegamos al final seguimos copiando
+    i++;
+  }
+  fclose(fp); //cerramos el archivo
+
+  return;
+}
+
+void pruebas (void) {
+  char bank[MAXTXT], palabra1[MAX], palabra2[MAX]; //definimos arreglo de banco de ejemplos
+  int i;
+
+  //lenamos el arreglo con el txt
+  banco(bank);
+
+  //llenamos las palabras
+  for (i=0; (bank[i])!= TER ;i++) {
+    palabra1[i]=bank[i];
+  }
+
+  printf("todo: %s\n",bank);
+
+  return;
 }

@@ -15,6 +15,7 @@ int main(void) {
     array[i]=ch;
     i++;
   } while (ch!=EOF);
+  fclose(fp);
 
   for (i=0; array[i]!=EOF ;i++)
     printf("%c\n",array[i]);
