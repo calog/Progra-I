@@ -1,21 +1,22 @@
 
 #include <stdio.h>
 
+
 #define TER '\n' //terminador establecido de palabra
 
 int main(void) {
+  FILE *fp;
+  char array[200], ch;
   int i;
-  char ch, array[200], palabra[200];
 
-  for (i=0; (ch=getchar())!= EOF ;i++) {
+  fp=fopen("bancoPruebas.txt", "r");
+  do {
+    ch=fgetc(fp);
     array[i]=ch;
-  }
+    i++;
+  } while (ch!=EOF);
 
-  for (i=0; (array[i]!=TER) ;i++) {
-    printf("%c",array[i]);
-  }
+  for (i=0; array[i]!=EOF ;i++)
+    printf("%c\n",array[i]);
 
-  for (i=0; (ch=getchar())!=TER ;i++) {
-    palabra[i]=ch;
-  }
 }
