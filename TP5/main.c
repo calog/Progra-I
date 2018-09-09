@@ -10,14 +10,40 @@ int wordlength (char *word);  //calcula la cantidad de caracteres en una palabra
 int askuser (char *point);  //toma las palabras de la consola
 void convert (char *arr);  //cambia las mayusculas por sus equivalentes en minusculas
 void copy (char *arr1, char *arr2);  //crea una copia del arreglo
+int request(void);  //pide numeros y valida
+void program (void);  //programa de comparacion de palabras
+void pruebas (void);  //banco de pruebas
 
 int main (void) {
+  int opcion;
+
+  while (1) { //mantener ciclo
+
+    printf("\n\n*******************MENU*******************\n");
+    printf("* 1. Programa de prueba de palabras.     *\n");
+    printf("* 2. Banco de pruebas.                   *\n");
+    printf("******************************************\n");
+
+    do {  //pedir el numero hasta que no haya errores
+      printf("Ingrese el numero de opcion:\n");
+      opcion=request();
+    } while (!opcion);
+
+    switch (opcion) { //menu
+      case 1: program(); break; //se eligio la primera opcion
+      case 2: pruebas(); break; //se eligio la segunda opcion
+    }
+  }
+
+}
+
+void program (void) {
     int result, error, i;
     char word1[MAX], word2[MAX], word1c[MAX], word2c[MAX];
 
     //ingreso de palabras
     do {
-      printf("-----------------------\n");
+      printf("\n-----------------------\n");
       printf("Ingrese primera palabra\n");
       error=askuser(word1);
     } while (error==1);
@@ -172,7 +198,7 @@ int askuser (char *point) {
   *(point+j)=TER;  //dejamos un terminador en la ultima posicion
 
   if (mistake==1) //se ingreso caracter no valido
-    printf("\nInput Error\n");
+    printf("\n----------Input Error----------\n");
 
   if (mistakes==1) { //se violo segmento
     printf("\nLa cantidad de maxima de letras es %d.\n",MAX);
@@ -206,5 +232,33 @@ void copy (char *arr1, char *arr2) {
     arr2[i]=arr1[i];
   }
   arr2[i]=TER;  //y copiamos el terminador
+
+}
+
+int request (void) {
+  int ch ,cant=0, mistake=0;
+  while ( (ch = getchar()) != '\n') {
+
+    if ( ((ch - '0')>2) || ((ch - '0')<0) ) { //si el caracter no es un numero esta mal
+      mistake=1;  //flag error
+    }
+    else
+      cant = cant*10 + (ch - '0');
+
+  }
+
+  if ( (cant==0)&&(mistake==0) ) //ninguna de las cantidades pedidas puede ser 0
+    printf("No puede ser cero.\n\n");
+
+  if (mistake==1) {
+    printf("----------Input Error----------\n\n");
+    return 0; //si hubo error devolvemos un 0 como flag
+  }
+  else {
+    return cant; //sino devolvemos el valor
+  }
+}
+
+void pruebas (void) {
 
 }
