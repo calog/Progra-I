@@ -13,8 +13,8 @@ void convert (char *arr);  //cambia las mayusculas por sus equivalentes en minus
 void copy (char *arr1, char *arr2);  //crea una copia del arreglo
 int request(void);  //pide numeros y valida
 void program (void);  //programa de comparacion de palabras
-void banco (char *array);  //banco de pruebas
-void pruebas (void);
+void banco (char *array);  //toma el banco de pruebas y lo copia a un arreglo
+void pruebas (void);  //separa las palabras y las compara
 
 int main (void) {
   int opcion;
@@ -284,18 +284,12 @@ void banco (char *array) {
 }
 
 void pruebas (void) {
-  char bank[MAXTXT], palabra1[MAX], palabra2[MAX]; //definimos arreglo de banco de ejemplos
-  int i;
+  char bank[MAXTXT]; //definimos arreglo de banco de ejemplos
 
   //lenamos el arreglo con el txt
   banco(bank);
 
-  //llenamos las palabras
-  for (i=0; (bank[i])!= TER ;i++) {
-    palabra1[i]=bank[i];
-  }
-
-  printf("todo: %s\n",bank);
+  printf("todo:\n%s",bank);
 
   return;
 }
