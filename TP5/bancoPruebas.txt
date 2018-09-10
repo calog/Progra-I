@@ -1,10 +1,8 @@
+HoLa
 hola
-lucas
-gaby
-richard
-arbol
-capo
-programacion
-lenguaje
-c
-fran
+armando
+odnamra
+romina
+marino
+vaca
+vacuna

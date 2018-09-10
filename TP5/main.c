@@ -4,6 +4,7 @@
 //definimos algunas constantes
 #define MAX 10 //maximos caracteres de la palabra
 #define MAXTXT 200  //maximo de caracteres dentro del txt
+#define MAXWORDS 10  //maximo de palabras dentro del txt
 #define TER '\n' //terminador establecido de palabra
 
 int validate (char *w1, char *w2);  //la función evalúa si es posible formar la primer palabra con las letras de la segunda, recibe punteros al inicio de ambas palabras.
@@ -15,6 +16,7 @@ int request(void);  //pide numeros y valida
 void program (void);  //programa de comparacion de palabras
 void banco (char *array);  //toma el banco de pruebas y lo copia a un arreglo
 void pruebas (void);  //separa las palabras y las compara
+void askbank (char *point, char *arr, int *times); //va sacando palabras del banco
 
 int main (void) {
   int opcion;
@@ -285,11 +287,121 @@ void banco (char *array) {
 
 void pruebas (void) {
   char bank[MAXTXT]; //definimos arreglo de banco de ejemplos
+  char word1[MAX], word2[MAX], word1c[MAX], word2c[MAX];
+  int i, result, j, times=0;
 
   //lenamos el arreglo con el txt
   banco(bank);
+  for (j=0;j<MAXWORDS;j++) {
+    askbank(word1,bank,&times);
+    times++;
+    askbank(word2,bank,&times);
+    times++;
 
-  printf("todo:\n%s",bank);
+    //mostramos palabras elegidas
+    printf("\n****************************************\n");
+    printf("Primera palabra: ");
+    for (i=0; word1[i] != TER ;i++) {
+      printf("%c",word1[i]);
+    }
+    printf("\n");
 
+    printf("Segunda palabra: ");
+    for (i=0; word2[i] != TER ;i++) {
+      printf("%c",word2[i]);
+    }
+    printf("\n");
+    printf("****************************************\n");
+
+    //pasamos todas las mayusculas a minisculas
+    convert(word1);
+    convert(word2);
+
+    //hacemos una copia de las palabras
+    copy(word1, word1c);
+    copy(word2, word2c);
+
+    //imprimimos las palabras convertidas
+    printf("\nEn minisculas:\n");
+    printf("****************************************\n");
+
+    printf("Primera palabra: ");
+    for (i=0; word1[i] != TER ;i++) {
+      printf("%c",word1[i]);
+    }
+    printf("\n");
+
+    printf("Segunda palabra: ");
+    for (i=0; word2[i] != TER ;i++) {
+      printf("%c",word2[i]);
+    }
+    printf("\n");
+    printf("****************************************\n");
+
+    //validamos las palabras en un orden
+    result=validate(word1,word2);
+
+    if (result==1) {  //se puede armar, lo comunicamos
+      printf("\nSe puede armar la primera palabra con la segunda.\n");
+    }
+    else {  //no se puede armar, decimos que no se puede
+      printf("\nNo se puede armar la primera palabra con la segunda.\n");
+    }
+
+    //validamos las palabras en otro orden
+    result=validate(word2c,word1c);
+
+    if (result==1) {  //se puede armar, lo comunicamos
+      printf("\nSe puede armar la segunda palabra con la primera.\n\n");
+    }
+    else {  //no se puede armar, decimos que no se puede
+      printf("\nNo se puede armar la segunda palabra con la primera.\n\n");
+    }
+  }
+
+  printf("termino for\n");
+  return;
+}
+
+void askbank (char *point, char *arr, int *times) {
+  int mistake=0, j=0, i, mistakes=0;
+  char ch;
+  char valid[52]={"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"};
+
+  while ( (ch = arr[*(times)]) != '\n') {
+
+    if (mistakes==0) { //si estamos dentro del segmento
+
+      for (i=0;i<52;i++) {  //evaluamos con todas las letras posibles
+
+        if ( j>=MAX) {  //si llegamos al final de la palabra
+          mistakes=1; //seteamos error de violacion de segmento
+          break;
+        }
+        else if ( ch==valid[i] ) { //si el caracter es valido esta bien
+          *(point + j)=ch;
+          (*times)++;
+          mistake=0;  //el caracter era valido asi que seteamos el flag en 0
+          break;  //salimos del ciclo para que el flag quede en 0
+        }
+        else  { //si el caracter no es valido seteamos el flag en 1
+          mistake=1;
+        }
+
+      } //termina for
+      j++;  //nos movemos a la siguiente posicion del arreglo
+
+    }
+
+  } //termina ingreso de datos
+  *(point+j)=TER;  //dejamos un terminador en la ultima posicion
+
+  if (mistake==1) //se ingreso caracter no valido
+    printf("\n----------Input Error----------\n");
+
+  if (mistakes==1) { //se violo segmento
+    printf("\nLa cantidad de maxima de letras es %d.\n",MAX);
+    mistake=1;
+  }
   return;
 }
