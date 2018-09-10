@@ -288,11 +288,12 @@ void banco (char *array) {
 void pruebas (void) {
   char bank[MAXTXT]; //definimos arreglo de banco de ejemplos
   char word1[MAX], word2[MAX], word1c[MAX], word2c[MAX];
-  int i, result, j, times=0;
+  int i, result, times=0;
 
   //lenamos el arreglo con el txt
   banco(bank);
-  for (j=0;j<MAXWORDS;j++) {
+  while (bank[times]!='/') {
+
     askbank(word1,bank,&times);
     times++;
     askbank(word2,bank,&times);
@@ -359,7 +360,6 @@ void pruebas (void) {
     }
   }
 
-  printf("termino for\n");
   return;
 }
 
